@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      function verifyCertificate() {
+        var certificateId = $("#certificateId").val();
+        $.ajax({
+          url: "https://sheets.googleapis.com/v4/spreadsheets/15Ke2htD1YI4n3VdApoedVvOVqyi_93mBX7fQeg2jvDg/values/Sheet1!A2:C?key=AIzaSyCQ20vruZn33vAZ6IsEtunqzPRMNynQvqY&certificateId=" + certificateId,
+          type: "GET",
+          success: function(data) {
+            var rows = data.values;
+            if (rows.length > 0) {
+              $("#result").html("Certificate ID: " + rows[0][0] + "<br>Name: " + rows[0][1] + "<br>Date of Issue: " + rows[0][2]);
+            } else {
+              $("#result").html("Certificate not found.");
+            }
+          },
+          error: function() {
+            $("#result").html("An error occurred.");
+          }
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <input type="text" id="certificateId" placeholder="Enter Certificate ID">
+    <button onclick="verifyCertificate()">Verify</button>
+    <div id="result"></div>
+  </body>
+</html>
