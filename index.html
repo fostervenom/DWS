@@ -6,45 +6,9 @@
   </head>
   <body>
     <h1>Certificate Verification</h1>
-    <form>
-      <label for="certificateNumber">Certificate Number:</label>
-      <input type="text" id="certificateNumber" name="certificateNumber">
-      <button type="button" onclick="verifyCertificate()">Verify</button>
-    </form>
-    <div id="certificateInfo">
-      <!-- certificate information will be displayed here -->
-    </div>
-    <script>
-      function verifyCertificate() {
-        // Get the certificate number entered by the user
-        var certificateNumber = document.getElementById("certificateNumber").value;
-
-        // Fetch the data from the Google Sheet based on the certificate number
-        var sheetUrl = "https://docs.google.com/spreadsheets/d/[SHEET_ID]/gviz/tq?tqx=out:csv&sheet=[SHEET_NAME]&tq=" + encodeURIComponent("select * where A = '" + certificateNumber + "'");
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", sheetUrl);
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            // Parse the CSV data
-            var data = xhr.responseText;
-            var rows = data.split("\n");
-            var header = rows[0].split(",");
-            var values = rows[1].split(",");
-
-            // Display the certificate information if it exists in the Google Sheet
-            if (values.length > 1) {
-              var certificateInfo = "Certificate Number: " + values[0] + "<br>";
-              certificateInfo += header[1] + ": " + values[1] + "<br>";
-              certificateInfo += header[2] + ": " + values[2] + "<br>";
-              // Add more fields if needed
-              document.getElementById("certificateInfo").innerHTML = certificateInfo;
-            } else {
-              document.getElementById("certificateInfo").innerHTML = "Certificate not found.";
-            }
-          }
-        };
-        xhr.send();
-      }
-    </script>
+<a href="2197461212.pdf " target="_blank">2197461212</a>
+<br>
+<a href="2197461213.pdf "target="_blank">2197461213</a>
+<br>
   </body>
 </html>
