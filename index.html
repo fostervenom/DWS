@@ -83,7 +83,6 @@
 								<div class="text2">Please enter candidate ID to search in database..!</div>
 
 								<p>
-  <label for="searchInput">Enter ID:</label>
   <input type="text" id="searchInput">
   <button onclick="searchData()">Search</button>
 
@@ -119,23 +118,23 @@
             <h3>ID: ${searchInput}</h3>
             <table border="1">
               <tr>
-                <th>Name</th>
+                <th>Name: </th>
                 <td>${searchData.NAME}</td>
               </tr>
               <tr>
-                <th>Age</th>
+                <th>Age: </th>
                 <td>${searchData.AGE}</td>
               </tr>
               <tr>
-                <th>Type</th>
+                <th>Type: </th>
                 <td>${searchData.TYPE}</td>
               </tr>
               <tr>
-                <th>Topic</th>
+                <th>Topic: </th>
                 <td>${searchData.TOPIC}</td>
               </tr>
               <tr>
-                <th>Status</th>
+                <th>Status: </th>
                 <td style="background-color: green;">${searchData.STATUS}</td>
               </tr>
             </table>
