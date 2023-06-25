@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSON Data Fetch</title>
+  <style>
+    .error-message {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h2>JSON Data Fetch</h2>
+  <input type="text" id="searchInput" placeholder="Enter ID">
+  <button onclick="searchCandidate()">Search</button>
+  <div id="searchResult"></div>
+
+  <script>
+    function speak(text) {
+      var synth = window.speechSynthesis;
+      var utterance = new SpeechSynthesisUtterance(text);
+      synth.speak(utterance);
+    }
+
+    function searchCandidate() {
+      var searchInput = document.getElementById('searchInput').value;
+      var searchResult = document.getElementById('searchResult');
+
+      // Fetch the JSON data
+      fetch('https://fostervenom.github.io/CertiVeri/data.json')
+        .then(response => response.json())
+        .then(data => {
+          var candidate = data.find(candidate => candidate.id == searchInput);
+
+          if (candidate) {
+            searchResult.innerHTML = `
+              <p>ID: ${candidate.id}</p>
+              <p>Name: ${candidate.name}</p>
+              <p>Status: ${candidate.status}</p>
+            `;
+            speak(`Candidate found. ID: ${candidate.id}, Name: ${candidate.name}, Status: ${candidate.status}`);
+          } else {
+            var errorMessage = '<p class="error-message">Details not found.</p>';
+            searchResult.innerHTML = errorMessage;
+            speak('Details not found');
+          }
+        })
+        .catch(error => {
+          console.log('Error fetching JSON data:', error);
+          var errorMessage = '<p class="error-message">An error occurred while fetching data. Please try again.</p>';
+          searchResult.innerHTML = errorMessage;
+          speak('An error occurred while fetching data. Please try again.');
+        });
+    }
+  </script>
+</body>
+</html>
