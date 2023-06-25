@@ -14,10 +14,10 @@
 
   <script>
     function fetchData() {
-      fetch('https://api.jsonbin.io/v3/b/6498aa0f8e4aa6225eb447e9')
+      fetch('data.json') // Replace the JSON link with the local file path 'data.json'
         .then(response => response.json())
         .then(jsonData => {
-          sessionStorage.setItem('jsonData', JSON.stringify(jsonData.record));
+          sessionStorage.setItem('jsonData', JSON.stringify(jsonData));
         })
         .catch(error => {
           console.error('An error occurred while fetching data:', error);
@@ -40,15 +40,43 @@
         if (searchData) {
           const html = `
             <h3>ID: ${searchInput}</h3>
-            <p>Name: ${searchData.NAME}</p>
-            <p>Age: ${searchData.AGE}</p>
-            <p>Type: ${searchData.TYPE}</p>
-            <p>Topic: ${searchData.TOPIC}</p>
-            <p>Status: ${searchData.STATUS}</p>
+            <table border="1">
+              <tr>
+                <th>Name</th>
+                <td>${searchData.NAME}</td>
+              </tr>
+              <tr>
+                <th>Age</th>
+                <td>${searchData.AGE}</td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>${searchData.TYPE}</td>
+              </tr>
+              <tr>
+                <th>Topic</th>
+                <td>${searchData.TOPIC}</td>
+              </tr>
+              <tr>
+                <th>Status</th>
+                <td style="background-color: green;">${searchData.STATUS}</td>
+              </tr>
+            </table>
           `;
           dataContainer.innerHTML = html;
+
+          // Create the success message
+          const successMessage = `${searchData.NAME} has ${searchData.STATUS} ${searchData.TYPE} in ${searchData.TOPIC}`;
+
+          // Speak the success message using text-to-speech
+          const speech = new SpeechSynthesisUtterance(successMessage);
+          window.speechSynthesis.speak(speech);
         } else {
           dataContainer.textContent = 'Details not found for the entered ID.';
+          // Speak the error message using text-to-speech
+          const errorMessage = "Data not found in NGO Database..!";
+          const speech = new SpeechSynthesisUtterance(errorMessage);
+          window.speechSynthesis.speak(speech);
         }
       } else {
         dataContainer.textContent = 'An error occurred while fetching data. Please try again.';
