@@ -1,56 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSON Data Fetch</title>
-  <style>
-    .error-message {
-      color: red;
-    }
-  </style>
+  <title>JSON Data Search</title>
 </head>
 <body>
-  <h2>JSON Data Fetch</h2>
-  <input type="text" id="searchInput" placeholder="Enter ID">
-  <button onclick="searchCandidate()">Search</button>
-  <div id="searchResult"></div>
+  <h2>JSON Data Search</h2>
+
+  <label for="searchInput">Enter ID:</label>
+  <input type="text" id="searchInput">
+  <button onclick="searchData()">Search</button>
+
+  <div id="dataContainer"></div>
 
   <script>
-    function speak(text) {
-      var synth = window.speechSynthesis;
-      var utterance = new SpeechSynthesisUtterance(text);
-      synth.speak(utterance);
-    }
-
-    function searchCandidate() {
-      var searchInput = document.getElementById('searchInput').value;
-      var searchResult = document.getElementById('searchResult');
-
-      // Fetch the JSON data
-      fetch('data.json')
+    function fetchData() {
+      fetch('https://api.jsonbin.io/v3/b/6498aa0f8e4aa6225eb447e9')
         .then(response => response.json())
-        .then(data => {
-          var candidate = data.find(candidate => candidate.id == searchInput);
-
-          if (candidate) {
-            searchResult.innerHTML = `
-              <p>ID: ${candidate.id}</p>
-              <p>Name: ${candidate.name}</p>
-              <p>Status: ${candidate.status}</p>
-            `;
-            speak(`Candidate found. ID: ${candidate.id}, Name: ${candidate.name}, Status: ${candidate.status}`);
-          } else {
-            var errorMessage = '<p class="error-message">Details not found.</p>';
-            searchResult.innerHTML = errorMessage;
-            speak('Details not found');
-          }
+        .then(jsonData => {
+          sessionStorage.setItem('jsonData', JSON.stringify(jsonData.record));
         })
         .catch(error => {
-          console.log('Error fetching JSON data:', error);
-          var errorMessage = '<p class="error-message">An error occurred while fetching data. Please try again.</p>';
-          searchResult.innerHTML = errorMessage;
-          speak('An error occurred while fetching data. Please try again.');
+          console.error('An error occurred while fetching data:', error);
         });
     }
+
+    function searchData() {
+      const searchInput = document.getElementById('searchInput').value;
+      const jsonData = JSON.parse(sessionStorage.getItem('jsonData'));
+      const dataContainer = document.getElementById('dataContainer');
+
+      if (jsonData) {
+        if (searchInput.trim() === '') {
+          dataContainer.textContent = '';
+          return;
+        }
+
+        const searchData = jsonData[searchInput];
+
+        if (searchData) {
+          const html = `
+            <h3>ID: ${searchInput}</h3>
+            <p>Name: ${searchData.NAME}</p>
+            <p>Age: ${searchData.AGE}</p>
+            <p>Type: ${searchData.TYPE}</p>
+            <p>Topic: ${searchData.TOPIC}</p>
+            <p>Status: ${searchData.STATUS}</p>
+          `;
+          dataContainer.innerHTML = html;
+        } else {
+          dataContainer.textContent = 'Details not found for the entered ID.';
+        }
+      } else {
+        dataContainer.textContent = 'An error occurred while fetching data. Please try again.';
+      }
+    }
+
+    // Fetch data on page load
+    fetchData();
   </script>
 </body>
 </html>
