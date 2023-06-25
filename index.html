@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSON Data Search</title>
+  <title>Verification | DWS - The NGO</title>
 </head>
 <body>
-  <h2>JSON Data Search</h2>
+  <h2>Certificate Verification - DWS</h2>
 
   <label for="searchInput">Enter ID:</label>
   <input type="text" id="searchInput">
@@ -72,9 +72,9 @@
           const speech = new SpeechSynthesisUtterance(successMessage);
           window.speechSynthesis.speak(speech);
         } else {
-          dataContainer.textContent = 'Details not found for the entered ID.';
+          dataContainer.textContent = 'Candidate details are not found in NGO Database..!';
           // Speak the error message using text-to-speech
-          const errorMessage = "Data not found in NGO Database..!";
+          const errorMessage = "Candidate details are not found in NGO Database..!";
           const speech = new SpeechSynthesisUtterance(errorMessage);
           window.speechSynthesis.speak(speech);
         }
@@ -86,5 +86,14 @@
     // Fetch data on page load
     fetchData();
   </script>
+  <br><br><br>
+  <hr>
+  <tr>
+    <ol>Last Update: 03:49 AM on 26/06/2023</ol>
+    <ol>Updated by Anurag Reeta Dixit</ol>
+    <ol>Type of Update: Initial</ol>
+    <ol>Remarks: fetching..</ol>
+  </tr>
+  </tr>
 </body>
 </html>
