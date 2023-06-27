@@ -90,15 +90,16 @@
 
   <script>
     function fetchData() {
-      fetch('data.json') // Replace the JSON link with the local file path 'data.json'
-        .then(response => response.json())
-        .then(jsonData => {
-          sessionStorage.setItem('jsonData', JSON.stringify(jsonData));
-        })
-        .catch(error => {
-          console.error('An error occurred while fetching data:', error);
-        });
-    }
+  fetch('https://script.googleusercontent.com/macros/echo?user_content_key=QQzBWZLNAjWt2gj_0mtvf1V77Y4XHgUA63fDXvkWtLaI4xd3nbSzjaVpn9r9-bRSNXNwUdsF_sz7fW4WZ4sdk0dh0Tz0rMmmm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJ5NgCZ4kqV4TnXI-YSMwcZRq3ileiC0ZOCeBtRzYMHP5zOPWpzYK7IRL8drBXcRw2ozKlAyL4PY2zPirY6SslKa1EOaQfrAxNz9Jw9Md8uu&lib=MjKR9BGDF8by9pcEA4iLeTCwvS0nEUVxJ')
+    .then(response => response.json())
+    .then(jsonData => {
+      sessionStorage.setItem('jsonData', JSON.stringify(jsonData));
+    })
+    .catch(error => {
+      console.error('An error occurred while fetching data:', error);
+    });
+}
+
 
     function searchData() {
       const searchInput = document.getElementById('searchInput').value;
