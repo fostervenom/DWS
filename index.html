@@ -83,96 +83,86 @@
 								<div class="text2">Please enter candidate ID to search in database..!</div>
 
 								<p>
-  <input type="text" id="searchInput">
-  <button onclick="searchData()">Search</button>
+    <input type="text" id="searchInput">
+    <button onclick="searchData()">Search</button>
 
-  <div id="dataContainer"></div>
+    <div id="dataContainer"></div>
 
-  <script>
-    function fetchData() {
-  fetch('https://script.googleusercontent.com/macros/echo?user_content_key=phmxTmC7J7QiiQJ9OC881IdFpcW3rzGzZNaw3xnMDLLd0w3vrG0YUaQtaM7Cvk4EMs55VWoVcISbEY9asTwxcPwreOgzj71Xm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnC65VhCzXenACQ4acW2GEFoClVL01rSo0CPIIW8LTEBxHgeDTpeIettnqGd6UpLt7Fa1S6jXSTMvAIBsh0y8ohSgz7EfeQtYHNz9Jw9Md8uu&lib=MjKR9BGDF8by9pcEA4iLeTCwvS0nEUVxJ')
-    .then(response => response.json())
-    .then(jsonData => {
-      sessionStorage.setItem('jsonData', JSON.stringify(jsonData));
-    })
-    .catch(error => {
-      console.error('An error occurred while fetching data:', error);
-    });
-}
-
-
-    function searchData() {
-      const searchInput = document.getElementById('searchInput').value;
-      const jsonData = JSON.parse(sessionStorage.getItem('jsonData'));
-      const dataContainer = document.getElementById('dataContainer');
-
-      if (jsonData) {
-        if (searchInput.trim() === '') {
-          dataContainer.textContent = '';
-          return;
-        }
-
-        const searchData = jsonData[searchInput];
-
-        if (searchData) {
-          const html = `
-            <h3>ID: ${searchInput}</h3>
-            <table border="1">
-              <tr>
-                <th>Name: </th>
-                <td>${searchData.NAME}</td>
-              </tr>
-              <tr>
-                <th>Age: </th>
-                <td>${searchData.AGE}</td>
-              </tr>
-              <tr>
-                <th>Type: </th>
-                <td>${searchData.TYPE}</td>
-              </tr>
-              <tr>
-                <th>Topic: </th>
-                <td>${searchData.TOPIC}</td>
-              </tr>
-              <tr>
-                <th>Status: </th>
-                <td style="background-color: green;">${searchData.STATUS}</td>
-              </tr>
-            </table>
-          `;
-          dataContainer.innerHTML = html;
-
-          // Create the success message
-          const successMessage = `${searchData.NAME} has ${searchData.STATUS} ${searchData.TYPE} in ${searchData.TOPIC}`;
-
-          // Speak the success message using text-to-speech
-          const speech = new SpeechSynthesisUtterance(successMessage);
-          window.speechSynthesis.speak(speech);
-        } else {
-          dataContainer.textContent = 'Candidate details are not found in NGO Database..!';
-          // Speak the error message using text-to-speech
-          const errorMessage = "Candidate details are not found in NGO Database..!";
-          const speech = new SpeechSynthesisUtterance(errorMessage);
-          window.speechSynthesis.speak(speech);
-        }
-      } else {
-        dataContainer.textContent = 'An error occurred while fetching data. Please try again.';
+    <script>
+      function fetchData() {
+        fetch('https://script.googleusercontent.com/macros/echo?user_content_key=phmxTmC7J7QiiQJ9OC881IdFpcW3rzGzZNaw3xnMDLLd0w3vrG0YUaQtaM7Cvk4EMs55VWoVcISbEY9asTwxcPwreOgzj71Xm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnC65VhCzXenACQ4acW2GEFoClVL01rSo0CPIIW8LTEBxHgeDTpeIettnqGd6UpLt7Fa1S6jXSTMvAIBsh0y8ohSgz7EfeQtYHNz9Jw9Md8uu&lib=MjKR9BGDF8by9pcEA4iLeTCwvS0nEUVxJ')
+          .then(response => response.json())
+          .then(jsonData => {
+            sessionStorage.setItem('jsonData', JSON.stringify(jsonData));
+          })
+          .catch(error => {
+            console.error('An error occurred while fetching data:', error);
+          });
       }
-    }
 
-    // Fetch data on page load
-    fetchData();
-  </script>
-  <br><br><br>
-  <hr>
-  <tr>
-    <ol>Last Update: 03:49 AM on 26/06/2023</ol>
-    <ol>Updated by Anurag Reeta Dixit</ol>
-    <ol>Type of Update: Initial</ol>
-    <ol>Remarks: fetching..</ol>
-  </tr>
-  </tr>
-								</p>								
+      function searchData() {
+        const searchInput = document.getElementById('searchInput').value;
+        const jsonData = JSON.parse(sessionStorage.getItem('jsonData'));
+        const dataContainer = document.getElementById('dataContainer');
+
+        if (jsonData) {
+          if (searchInput.trim() === '') {
+            dataContainer.textContent = '';
+            return;
+          }
+
+          const searchData = jsonData[searchInput];
+
+          if (searchData) {
+            const html = `
+              <h3>ID: ${searchInput}</h3>
+              <table border="1">
+                <tr>
+                  <th>Name: </th>
+                  <td>${searchData.Name}</td>
+                </tr>
+                <tr>
+                  <th>Age: </th>
+                  <td>${searchData.Age}</td>
+                </tr>
+                <tr>
+                  <th>Type: </th>
+                  <td>${searchData.Type}</td>
+                </tr>
+                <tr>
+                  <th>Topic: </th>
+                  <td>${searchData.Topic}</td>
+                </tr>
+                <tr>
+                  <th>Status: </th>
+                  <td style="background-color: green;">${searchData.Status}</td>
+                </tr>
+              </table>
+            `;
+            dataContainer.innerHTML = html;
+
+            // Create the success message
+            const successMessage = `${searchData.Name} has ${searchData.Status} ${searchData.Type} in ${searchData.Topic}`;
+
+            // Speak the success message using text-to-speech
+            const speech = new SpeechSynthesisUtterance(successMessage);
+            window.speechSynthesis.speak(speech);
+          } else {
+            dataContainer.textContent = 'Candidate details are not found in NGO Database..!';
+            // Speak the error message using text-to-speech
+            const errorMessage = "Candidate details are not found in NGO Database..!";
+            const speech = new SpeechSynthesisUtterance(errorMessage);
+            window.speechSynthesis.speak(speech);
+          }
+        } else {
+          dataContainer.textContent = 'An error occurred while fetching data. Please try again.';
+        }
+      }
+
+      // Fetch data on page load
+      fetchData();
+    </script>
+  </p>									
  
 								<figure class="video"><iframe  src="//www.youtube.com/embed/W4GMYQx58OE"></iframe></figure>
 							</div>
