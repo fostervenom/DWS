@@ -235,78 +235,26 @@
               <h3>Certificate ID: ${searchInput}</h3>
 
               <table border="1">
-
                 <tr>
-
                   <th>Name: </th>
-
                   <td>${searchData.Name}</td>
-
                 </tr>
-
                 <tr>
-
                   <th>Age: </th>
-
                   <td>${searchData.Age}</td>
-
                 </tr>
-
                 <tr>
-
                   <th>Type: </th>
-
                   <td>${searchData.Type}</td>
-
                 </tr>
-
                 <tr>
-
                   <th>Topic: </th>
-
                   <td>${searchData.Topic}</td>
-
                 </tr>
-
                 <tr>
-
                   <th>Status: </th>
-
-                  <td id="statusCell">${searchData.Status}</td>
-
+                  <td>${searchData.Status}</td>
                 </tr>
-
-<script>
-  // Assuming you have the response data stored in a variable called 'response'
-  var response = {
-    "Status": "Expired" // Example status value from JSON
-  };
-
-  var statusCell = document.getElementById("statusCell");
-
-  switch (response.Status) {
-    case "Expired":
-      statusCell.style.backgroundColor = "red";
-      break;
-    case "Pending":
-      statusCell.style.backgroundColor = "yellow";
-      break;
-    case "Valid":
-      statusCell.style.backgroundColor = "green";
-      break;
-    default:
-      // Set a default color if the status doesn't match any of the expected values
-      statusCell.style.backgroundColor = "white";
-      break;
-  }
-
-  // Set the text content of the cell to the value from the JSON
-  statusCell.textContent = response.Status;
-</script>
-
-
-                </tr>
-
               </table>
 
             `;
@@ -317,7 +265,7 @@
 
             // Create the success message
 
-            const successMessage = `${searchData.Name} has ${searchData.Status} ${searchData.Type} in ${searchData.Topic}`;
+            const successMessage = `${searchData.Name} has {searchData.Status} ${searchData.Type} in ${searchData.Topic}`;
 
 
 
