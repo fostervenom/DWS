@@ -90,7 +90,7 @@
 
   <script>
     function fetchData() {
-  fetch('https://script.google.com/macros/s/AKfycbyo1tzFeXonufXwP5CTYpmLCTWtdZkhCYkeOdr0SuqLLIyBOXRVvdRvpltqvXEYAotnmQ/exec')
+  fetch('https://script.googleusercontent.com/macros/echo?user_content_key=phmxTmC7J7QiiQJ9OC881IdFpcW3rzGzZNaw3xnMDLLd0w3vrG0YUaQtaM7Cvk4EMs55VWoVcISbEY9asTwxcPwreOgzj71Xm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnC65VhCzXenACQ4acW2GEFoClVL01rSo0CPIIW8LTEBxHgeDTpeIettnqGd6UpLt7Fa1S6jXSTMvAIBsh0y8ohSgz7EfeQtYHNz9Jw9Md8uu&lib=MjKR9BGDF8by9pcEA4iLeTCwvS0nEUVxJ')
     .then(response => response.json())
     .then(jsonData => {
       sessionStorage.setItem('jsonData', JSON.stringify(jsonData));
