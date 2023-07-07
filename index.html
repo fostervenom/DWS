@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Home</title>
+		<meta charset="utf-8">
+		<meta name = "format-detection" content = "telephone=no" />
+		<link rel="icon" href="images/favicon.ico">
+		<link rel="shortcut icon" href="images/favicon.ico" />
+		<link rel="stylesheet" href="css/owl.carousel.css">
+		<link rel="stylesheet" href="css/slider.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery-migrate-1.1.1.js"></script>
+		<script src="js/script.js"></script>
+		<script src="js/jquery.ui.totop.js"></script>
+		<script src="js/superfish.js"></script>
+		<script src="js/jquery.equalheights.js"></script>
+		<script src="js/jquery.mobilemenu.js"></script>
+		<script src="js/jquery.easing.1.3.js"></script>
+		<script src="js/owl.carousel.js"></script>
+		<script src="js/jquery.flexslider-min.js"></script>
+		<script src="js/kwiks.js"></script>
+		<script>
+			$(document).ready(function(){
+				$().UItoTop({ easingType: 'easeOutQuart' });
+				var owl = $("#owl");
+				owl.owlCarousel({
+					items : 4, //10 items above 1000px browser width
+					itemsDesktop : [995,3], //5 items between 1000px and 901px
+					itemsDesktopSmall : [767, 2], // betweem 900px and 601px
+					itemsTablet: [700, 2], //2 items between 600 and 0
+					itemsMobile : [479, 1], // itemsMobile disabled - inherit from itemsTablet option
+					navigation : true,
+				});
+			})
+			var Main = Main || {};
+			jQuery(window).load(function() {
+				window.responsiveFlag = jQuery('#responsiveFlag').css('display');
+				Main.gallery = new Gallery();
+				jQuery(window).resize(function() {
+					Main.gallery.update();
+				});
+			});
+			function Gallery(){
+				var self = this,
+					container = jQuery('.flexslider'),
+					clone = container.clone( false );
+					this.init = function (){
+						if( responsiveFlag == 'block' ){
+						var slides = container.find('.slides');
+						slides.kwicks({
+							max : 500,
+							spacing : 0
+						}).find('li > a').click(function (){
+							return false;
+						});
+						} else {
+							container.flexslider();
+						}
+					}
+					this.update = function () {
+						var currentState = jQuery('#responsiveFlag').css('display');
+						if(responsiveFlag != currentState) {
+							responsiveFlag = currentState;
+							container.replaceWith(clone);
+							container = clone;
+							clone = container.clone( false );
+							this.init();
+						}
+					}
+				this.init();
+			}
+		</script>
+		<!--[if lt IE 8]>
+		<div style=' clear: both; text-align:center; position: relative;'>
+			<a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+				<img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+			</a>
+		</div>
+		<![endif]-->
+		<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+		<link rel="stylesheet" media="screen" href="css/ie.css">
+		<![endif]-->
+	</head>
+	<body class="page1" id="top">
+<!--==============================header=================================-->
+		<header>
+			<div class="clear"></div>
+			<div class="container_12">
+				<div class="grid_12">
+					<h1>
+						<a href="index.html">
+							<img src="images/logo.png" alt="Your Happy Family">
+						</a>
+					</h1>
+					<div class="menu_block">
+						<nav class="horizontal-nav full-width horizontalNav-notprocessed">
+							<ul class="sf-menu">
+								<li class="current"><a href="index.html">Home</a>
+									<ul>
+										<li><a href="#">history</a></li>
+										<li><a href="#">offers</a></li>
+										<li><a href="#">news</a>
+										<ul>
+											<li><a href="#">fresh </a></li>
+											<li><a href="#">archive</a></li>
+										</ul>
+									</ul>
+								</li>
+								<li><a href="index-1.html">Videos </a></li>
+								<li><a href="index-2.html">Campaigns</a></li>
+								<li><a href="index-3.html">Volunteer </a></li>
+								<li><a href="index-4.html">Contacts</a></li>
+							</ul>
+						</nav>
+						<div class="clear"></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</header>
+		<div class="main">
+<!--==============================Content=================================-->
+			<div class="content"><div class="ic">More Website Templates @ TemplateMonster.com - December 16, 2013!</div>
+				<div class="container_12">
+					<div class="grid_8">
+						<div class="flexslider">
+							<ul class="slides">
+								<li>
+									<img src="images/page1_img1.jpg" alt="">
+									<div class="flex-caption">
+										<p>Hope</p>
+									</div>
+								</li>
+								<li>
+									<img src="images/page1_img2.jpg" alt="">
+									<div class="flex-caption c2">
+										<p>Save</p>
+									</div>
+								</li>
+								<li>
+									<img src="images/page1_img3.jpg" alt="">
+									<div class="flex-caption">
+										<p>Help</p>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<span id="responsiveFlag"></span>
+					</div>
+					<div class="grid_4">
+						<a href="#" class="donate">Donate</a>
+						<div class="text1">Catalyzing Hope, Transforming Lives</div>
+						<p>We are driven by our passion for positive social change and a commitment to serving underprivileged communities. Together, let's make a lasting impact and create a world filled with hope and opportunity.</p>
+						"Children must be taught how to think, not what to think."
+- <b>Margaret Mead</b>
+					</div>
+					<div class="clear"></div>
+<hr>
+						<div>
+<link href= "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+      integrity="sha384giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+   <style>
+      .container{
+         background-color: #016064;
+      }
+      p{
+      text-align: center;
+      }
+   </style>
+<body onload="load()">
+      <p>
+      <div class="d-flex justify-content-center fs-1 fw-bold "style="color: #016064;">How we doin'</div>
+      </p>
+      <p>
+      <div class="container">
+         <div class="row">
+            <div class="col-sm">
+               <p id='0101' class="fs-2 text-light">0</p>
+               <p class="text-light">School Registered</p>
+            </div>
+            <div class="col-sm">
+               <p id='0102' class="fs-2 text-light">876</p>
+               <p class="text-light">Students Registered</p>
+         </div>
+         <div class="col-sm">
+            <p class="fs-2 text-light"><span id='0103'>12</span>%</p>
+            <p class="text-light align-content-center">Learning Rate</p>
+         </div>
+      </div>
+   </div>
+   </p>
+   <script>
+      function animate(obj, initVal, lastVal, duration) {
+         let startTime = null;
+
+      //get the current timestamp and assign it to the currentTime variable
+      let currentTime = Date.now();
+
+      //pass the current timestamp to the step function
+      const step = (currentTime ) => {
+
+      //if the start time is null, assign the current time to startTime
+      if (!startTime) {
+         startTime = currentTime ;
+      }
+
+      //calculate the value to be used in calculating the number to be displayed
+      const progress = Math.min((currentTime - startTime)/ duration, 1);
+
+      //calculate what to be displayed using the value gotten above
+      obj.innerHTML = Math.floor(progress * (lastVal - initVal) + initVal);
+
+      //checking to make sure the counter does not exceed the last value (lastVal)
+      if (progress < 1) {
+         window.requestAnimationFrame(step);
+      } else {
+            window.cancelAnimationFrame(window.requestAnimationFrame(step));
+         }
+      };
+      //start animating
+         window.requestAnimationFrame(step);
+      }
+      let text1 = document.getElementById('0101');
+      let text2 = document.getElementById('0102');
+      let text3 = document.getElementById('0103');
+      const load = () => {
+         animate(text1, 0, 02, 7000);
+         animate(text2, 0, 500, 7000);
+         animate(text3, 100, 90, 7000);
+      }
+   </script>
+   </div>
+					
+					<div class="clear"></div>
+					<div class="grid_12">
+						<h2>Meet Our Team</h2>
+						<div id="owl">
+							<div class="item">
+								<a href="#"><img src="images/team1.jpg" alt="">Anurag<br>
+								<small>(Project Manager)</small></a>
+							</div>
+							<div class="item it1">
+								<a href="#"><img src="images/team2.jpg" alt="">Bhawana<br>
+								<small>(Motivatioal Speaker)</small></a>
+							</div>
+							<div class="item it2">
+								<a href="#"><img src="images/team3.jpg" alt="">Himanshu<br>
+								<small>(External Affairs)</small></a>
+							</div>
+							<div class="item it3">
+								<a href="#"><img src="images/team4.jpg" alt="">Shikha<br>
+								<small>(Relationship Manager)</small></a>
+							</div>
+							<div class="item">
+								<a href="#"><img src="images/team5.jpg" alt="">Anubhav<br>
+								<small>(Medical Advisor)</small></a>
+							</div>
+							<div class="item it1">
+								<a href="#"><img src="images/team6.jpg" alt="">Mayank<br>
+								<small>(Media Representative)</small></a>
+							</div>
+							<div class="item it2">
+								<a href="#"><img src="images/team7.jpg" alt="">Ajitesh<br>
+								<small>(Teach Advisor)</small></a>
+							</div>
+							<div class="item it3">
+								<a href="#"><img src="images/team8.jpg" alt="">Sample Name<br>
+								<small>(@)</small></a>
+							</div>
+						</div>
+					</div>
+					<div class="grid_4">
+						<h3 class="nowrap mb0">Announcement</h3>
+					<marquee behavior="scroll" direction="up" height="260px" scrollamount="1">
+						<ul>
+ 						 <li><b>1. Upon request, 2nd digital copy of certificate is now available..!</b></li><hr>
+ 						 <li><b>2. Without consent letter, no candidate will be allowed to attend workshop..!</b></li><hr>
+ 						 <li><b>3. Consent letter is now available oon our website..!</b></li><hr>
+						</ul> 
+					</marquee>
+						<div class="alright"><a href="contact.html" class="btn">Contact Us</a></div>
+					</div>
+					<div class="grid_7 prefix_1">
+						<h3>Swastik - The LMS</h3>
+						<img src="images/swastik.gif" alt="" class="img_inner fleft" width="50%">
+						
+						<div class="clear"></div>
+						<div class="alright"><a href="lms.html" class="btn">Open Portal</a></div>
+					</div>
+				</div>
+			</div>
+<!--==============================footer=================================-->
+			<footer>
+				<div class="hor bg3"></div>
+				<div class="container_12">
+					<div class="grid_12 ">
+						<div class="socials">
+							<a href="#"></a>
+							<a href="#"></a>
+							<a href="#"></a>
+							<div class="clear"></div>
+						</div>
+						<div class="copy">
+							<strong>D'vine Welfare Society</strong>   &copy; <span id="copyright-year"></span> | <a href="Privacy&Policy.txt">Privacy Policy</a> 
+
+
+
+
+
+
+
+<br>
+							Website designed by <a href="https://www.instagram.com/theadixit/" rel="nofollow">Anurag Reeta Dixit</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>
