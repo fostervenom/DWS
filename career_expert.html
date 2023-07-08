@@ -1,29 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Custom Link Generator</title>
+  <title>Career Counseling</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
   <script>
     function generateLink() {
       var inputText = document.getElementById("inputText").value;
-      var link = document.getElementById("customLink");
+      var linkButtons = document.getElementsByClassName("expert-link");
 
-      // Replace "@@@" in the link with the input text
-      var modifiedLink = link.href.replace("@@@", encodeURIComponent(inputText));
+      // Replace "@@@" in each expert link with the input text
+      for (var i = 0; i < linkButtons.length; i++) {
+        var expertLink = linkButtons[i].href;
+        var modifiedLink = expertLink.replace("@@@", encodeURIComponent(inputText));
+        linkButtons[i].href = modifiedLink;
+      }
 
-      // Set the href attribute of the link
-      link.href = modifiedLink;
-
-      // Open the generated link
-      window.location.href = modifiedLink;
+      // Show the links
+      var expertLinks = document.getElementsByClassName("expert-links");
+      for (var j = 0; j < expertLinks.length; j++) {
+        expertLinks[j].classList.remove("hidden");
+      }
     }
   </script>
 </head>
 <body>
-  <h1>Career Councelling</h1>
+  <h1>Career Counseling Portal by DWS</h1>
   <label for="inputText">Enter your name:</label>
   <input type="text" id="inputText">
   <button onclick="generateLink()">Connect with Expert</button>
-  <br>
-  <a id="customLink" href="https://wa.me/917460808009?text=Hi+Sir%2C+My+Name+is+@@@%2C+I+want+a+career+guidance+from+you.%21">Link</a>
+  <br><br>
+  <table>
+    <tr>
+      <td>
+        <img src="images/team1.jpg" width="80" alt="Expert 1">
+        <h3>Expert 1</h3>
+        <p>Qualification: Qualification 1</p>
+        <p>Expertise: Expertise 1</p>
+        <div class="expert-links hidden">
+          <a class="expert-link" href="https://wa.me/917460808009?text=Hi+@@@%2C+I+am+interested+in+career+counseling+from+you.%21">Connect</a>
+        </div>
+      </td>
+      <td>
+        <img src="images/team1.jpg" width="80" alt="Expert 2">
+        <h3>Expert 2</h3>
+        <p>Qualification: Qualification 2</p>
+        <p>Expertise: Expertise 2</p>
+        <div class="expert-links hidden">
+          <a class="expert-link" href="https://wa.me/917460808009?text=Hi+@@@%2C+I+am+interested+in+career+counseling+from+you.%21">Connect</a>
+        </div>
+      </td>
+      <td>
+        <img src="images/team1.jpg" width="80" alt="Expert 3">
+        <h3>Expert 3</h3>
+        <p>Qualification: Qualification 3</p>
+        <p>Expertise: Expertise 3</p>
+        <div class="expert-links hidden">
+          <a class="expert-link" href="https://wa.me/917460808009?text=Hi+@@@%2C+I+am+interested+in+career+counseling+from+you.%21">Connect</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <img src="images/team1.jpg" width="80" alt="Expert 4">
+        <h3>Expert 4</h3>
+        <p>Qualification: Qualification 4</p>
+        <p>Expertise: Expertise 4</p>
+        <div class="expert-links hidden">
+          <a class="expert-link" href="https://wa.me/917460808009?text=Hi+@@@%2C+I+am+interested+in+career+counseling+from+you.%21">Connect</a>
+        </div>
+      </td>
+      <td>
+        <img src="images/team1.jpg" width="80" alt="Expert 5">
+        <h3>Expert 5</h3>
+        <p>Qualification: Qualification 5</p>
+        <p>Expertise: Expertise 5</p>
+        <div class="expert-links hidden">
+          <a class="expert-link" href="https://wa.me/917460808009?text=Hi+@@@%2C+I+am+interested+in+career+counseling+from+you.%21">Connect</a>
+        </div>
+      </td>
+      <td>
+        <img src="images/team1.jpg" width="80" alt="Expert 6">
+        <h3>Expert 6</h3>
+        <p>Qualification: Qualification 6</p>
+        <p>Expertise: Expertise 6</p>
+        <div class="expert-links hidden">
+          <a class="expert-link" href="https://wa.me/917460808009?text=Hi+@@@%2C+I+am+interested+in+career+counseling+from+you.%21">Connect</a>
+        </div>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
