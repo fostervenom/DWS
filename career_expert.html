@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom Link Generator</title>
+  <script>
+    function generateLink() {
+      var inputText = document.getElementById("inputText").value;
+      var link = document.getElementById("customLink");
+
+      // Replace "@@@" in the link with the input text
+      var modifiedLink = link.href.replace("@@@", encodeURIComponent(inputText));
+
+      // Set the href attribute of the link
+      link.href = modifiedLink;
+
+      // Open the generated link
+      window.location.href = modifiedLink;
+    }
+  </script>
+</head>
+<body>
+  <h1>Career Councelling</h1>
+  <label for="inputText">Enter your name:</label>
+  <input type="text" id="inputText">
+  <button onclick="generateLink()">Connect with Expert</button>
+  <br>
+  <a id="customLink" href="https://wa.me/917460808009?text=Hi+Sir%2C+My+Name+is+@@@%2C+I+want+a+career+guidance+from+you.%21">Link</a>
+</body>
+</html>
