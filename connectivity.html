@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KAM Data Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            text-align: left;
+        }
+        h1 {
+            color: #333;
+        }
+        select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tfoot th {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select a KAM to view their data:</h1>
+
+        <!-- Dropdown for selecting a KAM -->
+        <label for="kamSelect">Select KAM:</label>
+        <select id="kamSelect"></select>
+
+        <!-- Table to display KAM's data -->
+        <table id="kamDataTable">
+            <thead>
+                <tr id="headerRow"></tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+                <tr id="footerRow"></tr>
+            </tfoot>
+        </table>
+
+        <!-- Additional Information -->
+        <div id="additionalInfo">
+            <p>Total Sellers: <span id="totalSellers">0</span></p>
+            <p>Required Connectivity per Seller: 3 calls</p>
+            <p>Connected Sellers: <span id="connectedSellers">0</span></p>
+            <p>Connectivity Percentage: <span id="connectivityPercentage">0.00%</span></p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Fetch JSON data from the provided URL
+        $.getJSON('https://script.google.com/macros/s/AKfycbwnLIzDIPGAph4MmUk_f6NAF4cUFHohofwrHeHfgMKeIZUJrEKnVwvQLvy7cS-QjOarAQ/exec', function(data) {
+            const kamSelect = document.getElementById('kamSelect');
+            const kamDataTable = document.getElementById('kamDataTable');
+            const headerRow = document.getElementById('headerRow');
+            const footerRow = document.getElementById('footerRow');
+            const totalSellers = document.getElementById('totalSellers');
+            const connectedSellers = document.getElementById('connectedSellers');
+            const connectivityPercentage = document.getElementById('connectivityPercentage');
+
+            // Extract unique KAM names from the data
+            const kamNames = [...new Set(data.map(item => item.KAM))];
+
+            // Populate the KAM dropdown
+            kamNames.forEach(kamName => {
+                const option = document.createElement('option');
+                option.value = kamName;
+                option.textContent = kamName;
+                kamSelect.appendChild(option);
+            });
+
+            // Extract headers from the first item in the data
+            const headers = Object.keys(data[0]);
+
+            // Populate the table headers
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+
+            // Function to update the table based on selected KAM
+            function updateTable(selectedKAM) {
+                const filteredData = data.filter(item => item.KAM === selectedKAM);
+                const tbody = kamDataTable.querySelector('tbody');
+                tbody.innerHTML = '';
+
+                // Initialize an object to store sums for numerical columns
+                const sums = {};
+
+                // Counters for sellers and connected sellers
+                let totalSellerCount = 0;
+                let connectedSellerCount = 0;
+
+                filteredData.forEach(item => {
+                    const row = document.createElement('tr');
+                    headers.forEach(header => {
+                        const cell = document.createElement('td');
+                        cell.textContent = item[header];
+
+                        // Check if the column is numerical and not NaN
+                        if (!isNaN(item[header])) {
+                            if (!sums[header]) {
+                                sums[header] = 0;
+                            }
+                            sums[header] += parseFloat(item[header]);
+                        }
+
+                        row.appendChild(cell);
+                    });
+                    tbody.appendChild(row);
+
+                    // Count total sellers and connected sellers
+                    totalSellerCount++;
+                    if (item['Connected'] === 'Yes') {
+                        connectedSellerCount++;
+                    }
+                });
+
+                // Populate the footer row with sums
+                const footerRowCells = headers.map(header => {
+                    const cell = document.createElement('td');
+                    cell.textContent = sums[header] || ''; // Display the sum or an empty string
+                    return cell;
+                });
+
+                // Add the footer cells to the footer row
+                footerRow.innerHTML = '';
+                footerRowCells.forEach(cell => footerRow.appendChild(cell));
+
+                // Display additional information
+                totalSellers.textContent = totalSellerCount;
+                connectedSellers.textContent = connectedSellerCount;
+                const percentage = totalSellerCount > 0 ? ((connectedSellerCount / totalSellerCount) * 100).toFixed(2) : '0.00';
+                connectivityPercentage.textContent = percentage + '%';
+            }
+
+            // Listen for changes in the KAM selection
+            kamSelect.addEventListener('change', function() {
+                const selectedKAM = kamSelect.value;
+                updateTable(selectedKAM);
+            });
+        });
+    </script>
+</body>
+</html>
