@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Data Search</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Seller Data Search</h1>
+        <div class="input-group mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search by Seller ID">
+            <div class="input-group-append">
+                <button class="btn btn-primary" id="searchButton" type="button">Search</button>
+            </div>
+        </div>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Email Address</th>
+                    <th>Seller ID</th>
+                    <th>SELLER MOBILE NUMBER</th>
+                    <th>CALL STATUS</th>
+                    <th>L1 - Call Tagging Disposition</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Replace with the actual JSON URL
+        const jsonURL = 'https://script.googleusercontent.com/a/macros/flipkart.com/echo?user_content_key=xGNTrqs0UndbyB3bEkhXRYc6fs5QsA39AFSi1Sv-PpzdDo83ETEzOi2cEval_LZmeqzVje00QKoFkpLT7malBwJXQGsblh4Dm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_nRPgeZU6HP9_84mSBgqs0RS2oZloN6w3h0lmODcuY_2OJ9dTKiuSkq2GzLujgisTjXGawhAh5p-YZUH4qx1ot8b6u-Rr1v2XjZkB_yzb6cNsYHaEKgl6iV-W9R06biD6sLwY7PRa6o0&lib=MnZBddzA_991bPgq-PhwI0pgEv2YCqn3J';
+
+        // Function to fetch and populate data
+        function fetchData() {
+            fetch(jsonURL)
+                .then(response => response.json())
+                .then(data => {
+                    const searchInput = document.getElementById('searchInput');
+                    const tableBody = document.getElementById('tableBody');
+                    tableBody.innerHTML = ''; // Clear previous data
+
+                    data["Sheet1"].forEach(item => {
+                        const sellerID = item["Seller ID"];
+                        if (sellerID.includes(searchInput.value)) {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${item.Timestamp}</td>
+                                <td>${item["Email Address"]}</td>
+                                <td>${item["Seller ID"]}</td>
+                                <td>${item["SELLER MOBILE NUMBER"]}</td>
+                                <td>${item["CALL STATUS"]}</td>
+                                <td>${item["L1 - Call Tagging Disposition"]}</td>
+                            `;
+                            tableBody.appendChild(row);
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching data: ' + error));
+        }
+
+        // Search button click event
+        document.getElementById('searchButton').addEventListener('click', fetchData);
+
+        // Initial data fetch
+        fetchData();
+    </script>
+</body>
+</html>
