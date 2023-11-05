@@ -70,7 +70,16 @@
             <p>Connectivity Percentage: <span id="connectivityPercentage">0.00%</span></p>
         </div>
     </div>
+<!-- Add this button in your HTML -->
+<button id="printToPDF">Print to PDF</button>
 
+<script>
+    document.getElementById('printToPDF').addEventListener('click', function() {
+        // Trigger the browser's print functionality
+        window.print();
+    });
+</script>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // Fetch JSON data from the provided URL
