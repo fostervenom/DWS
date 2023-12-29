@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Templates</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #templateDropdown {
+            margin-bottom: 10px;
+        }
+
+        #templatePlaceholder {
+            margin-bottom: 20px;
+        }
+
+        .email-template-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .warning-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Home button -->
+    <header>
+        <button class="btn btn-primary" onclick="goHome()">Home</button>
+    </header>
+
+    <!-- Dropdown button to select template -->
+    <label for="templateDropdown">Select Template:</label>
+    <select id="templateDropdown" class="form-control" onchange="loadTemplate()">
+        <option value="introductionEmail">Introduction Email</option>
+        <option value="accessRequestEmail">Access Request Email</option>
+        <option value="japReportEmail">JAP Report Email</option>
+        <option value="rnrWarningEmail" selected>RNR Warning Email</option>
+    </select>
+
+    <!-- Template placeholder -->
+    <div id="templatePlaceholder" class="email-template-container">
+        <!-- Template content will be inserted here -->
+    </div>
+
+    <!-- Copy Template button -->
+    <button class="btn btn-success" onclick="copyTemplate()">Copy Template</button>
+
+    <!-- Copy and Send Template button -->
+    <button class="btn btn-warning" onclick="copyAndSendTemplate()">Copy & Send Template</button>
+
+    <!-- Footer with developer information -->
+    <footer>
+        <p>Developed by: Anurag Dixit</p>
+        <p>Email: anurag.80545614@flipkart.com</p>
+    </footer>
+
+    <!-- Bootstrap JS and your custom script -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-vBqDV/cY4p1p1i1jEGF5an5w2Bo1iDQZ1GuA7qI3ZFfFAEAISmD9c6bSSUnQlmh/j" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+        function goHome() {
+            alert("Home button clicked!");
+        }
+
+        function loadTemplate() {
+            var templateDropdown = document.getElementById("templateDropdown");
+            var selectedTemplate = templateDropdown.options[templateDropdown.selectedIndex].value;
+
+            var templateContent = getSampleTemplateContent(selectedTemplate);
+
+            document.getElementById("templatePlaceholder").innerHTML = templateContent;
+        }
+
+        function getSampleTemplateContent(template) {
+            if (template === "introductionEmail") {
+                return "<p>Dear [Recipient's Name],</p><p>Welcome to our platform! We are excited to have you on board.</p>";
+            } else if (template === "accessRequestEmail") {
+                return "<p>Dear [Admin's Name],</p><p>I request access to the following resources: [Resource List].</p>";
+            } else if (template === "japReportEmail") {
+                return "<p>Dear [Recipient's Name],</p><p>Attached is the Joint Account Planning (JAP) report for your review.</p>";
+            } else if (template === "rnrWarningEmail") {
+                return `<p>Dear [Seller's Name],</p>
+                        <p>I hope this email finds you well. We have been trying to reach you regarding some crucial matters concerning your seller account on Flipkart.</p>
+                        <p>⚠️ <strong>Warning:</strong> Your non-responsiveness to our recent calls has raised concerns.</p>
+                        <img src="https://placekitten.com/600/300" alt="Warning Image" class="warning-image">
+                        <p>It's crucial for you to understand the extensive consequences of not responding promptly. Here are additional drawbacks:</p>
+                        <ul>
+                            <li><strong>1. Negative Impact on Rankings:</strong> Lack of communication can lead to a decline in your product rankings, reducing visibility and potentially affecting sales. 📉</li>
+                            <li><strong>2. Ineffective Campaign Strategies:</strong> Without your input, we cannot tailor our campaign strategies to align with your goals. This may result in suboptimal performance and missed opportunities. ❌</li>
+                            <li><strong>3. Potential Loss of Exclusive Opportunities:</strong> Non-responsive sellers may miss out on exclusive promotional opportunities, discounts, and featured placements that could significantly boost your sales. 🚫</li>
+                            <li><strong>4. Adverse Customer Experience:</strong> Ineffective communication may lead to delays in addressing customer concerns or issues, potentially impacting the overall shopping experience for your customers. 📌</li>
+                        </ul>
+                        <p><strong>Action Required:</strong></p>
+                        <ol>
+                            <li>Please ensure that you are available for our scheduled calls to discuss and enhance your campaigns.</li>
+                            <li>Non-responsiveness will lead to a disruption in our support services, affecting your seller account's performance.</li>
+                            <li>Extensions or additional support will not be entertained for sellers who consistently fail to engage in communication.</li>
+                        </ol>
+                        <p>Your success as a seller on Flipkart is our priority, and we value our partnership. Let's work together to ensure the continued success of your campaigns.</p>
+                        <p>Thank you for your prompt attention to this matter.</p>
+                        <p>Best regards,</p>`;
+            }
+        }
+
+        function copyTemplate() {
+            var templatePlaceholder = document.getElementById("templatePlaceholder");
+            var range = document.createRange();
+            range.selectNode(templatePlaceholder);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+            alert("Template copied!");
+        }
+
+        function copyAndSendTemplate() {
+            var templatePlaceholder = document.getElementById("templatePlaceholder");
+            var templateContent = encodeURIComponent(templatePlaceholder.innerText);
+            var mailtoLink = "mailto:?subject=Email Template&body=" + templateContent;
+            window.location.href = mailtoLink;
+            alert("Template copied and opened in your default email client!");
+        }
+
+        window.onload = function() {
+            loadTemplate();
+        };
+    </script>
+</body>
+</html>
