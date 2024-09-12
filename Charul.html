@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry, Charul</title>
+    <style>
+        body {
+            background-color: #f7e9e9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        h1 {
+            color: #FF69B4;
+            animation: slideInDown 1.5s ease-in-out;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+        .btn-primary {
+            background-color: #FF69B4;
+            border-color: #FF69B4;
+            font-size: 18px;
+            padding: 10px 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .btn-success {
+            background-color: #FF69B4;
+            border-color: #FF69B4;
+            font-size: 18px;
+            padding: 10px 20px;
+            animation: bounceIn 1.5s ease-in-out;
+        }
+        .heart {
+            color: red;
+            font-size: 40px;
+            animation: pulse 2s infinite;
+        }
+        #messageBox {
+            display: none;
+            margin-top: 20px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+        #apologyMessage {
+            display: none;
+            margin-top: 20px;
+            font-size: 20px;
+            color: #555;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+        /* Hide the video player */
+        .video-player {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Dear Charul,</h1>
+        <p>I know things have been a bit rough. I want to apologize and let you know how much you mean to me.</p>
+        <p>Click the button below when you're ready to hear my apology.</p>
+        <button class="btn btn-primary" onclick="showMessage()">I'm Ready</button>
+
+        <div id="messageBox">
+            <p class="lead">Here's what I want to say...</p>
+            <button class="btn btn-success" onclick="revealApology()">Reveal Apology</button>
+        </div>
+
+        <div id="apologyMessage">
+            <p class="lead">I am truly sorry for anything I did that hurt you. You are special to me, and I never want to upset you. Can we start fresh? <br><span class="heart">❤️</span></p>
+        </div>
+    </div>
+
+    <!-- Embedded YouTube video for background music, hidden -->
+    <iframe 
+        id="bgMusic" 
+        class="video-player" 
+        src="https://www.youtube.com/embed/hvqc8lPmCfU?autoplay=1&loop=1&playlist=hvqc8lPmCfU&mute=1" 
+        frameborder="0" 
+        allow="autoplay; encrypted-media" 
+        allowfullscreen>
+    </iframe>
+
+    <script>
+        // Function to show the apology message
+        function showMessage() {
+            document.getElementById("messageBox").style.display = "block";
+        }
+
+        // Function to reveal the heartfelt apology
+        function revealApology() {
+            document.getElementById("apologyMessage").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
